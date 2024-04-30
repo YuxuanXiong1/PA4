@@ -16,29 +16,26 @@ public class PA4 implements PA4Constants {
 
 
 /* uncomment this only for PA4b */
-      System.out.println("\n\nPretty Print the Program");
-      Visitor v2 = new PP_Visitor();  // pretty prints the MiniC program
-      String s = (String) n.accept(v2, 0);
-      System.out.println("#include <stdio.h>\n#include <stdbool.h>\nvoid print(int n){printf(\"%10d\\n\",n);}");
-      System.out.println(s);
+//      System.out.println("\n\nPretty Print the Program");
+//      Visitor v2 = new PP_Visitor();  // pretty prints the MiniC program
+//      String s = (String) n.accept(v2, 0);
+//      System.out.println("#include <stdio.h>\n#include <stdbool.h>\nvoid print(int n){printf(\"%10d\\n\",n);}");
+//      System.out.println(s);
 
-
-/* uncomment this only for PA4c and PA4d 
+// uncomment this only for PA4c and PA4d
       System.out.println("\n\nGenerating Symbol Table");
       SymbolTableVisitor v3 = new SymbolTableVisitor(); // generates a SymbolTable
       SymbolTable st = v3.symbolTable;
       n.accept(v3,"");
       System.out.println(st);
 
-*/
-/* uncomment this only for PA4d 
-      System.out.println("\n\nType Checking");
-      TypeCheckingVisitor v4 = new TypeCheckingVisitor(st);
-      n.accept(v4,"");
-      System.out.println(v4.num_errors+" type errors found");
-
-      System.out.println("\n\nDone!");
-*/
+// uncomment this only for PA4d
+//      System.out.println("\n\nType Checking");
+//      TypeCheckingVisitor v4 = new TypeCheckingVisitor(st);
+//      n.accept(v4,"");
+//      System.out.println(v4.num_errors+" type errors found");
+//
+//      System.out.println("\n\nDone!");
 
 
     } catch (Exception e) {
@@ -652,6 +649,16 @@ public class PA4 implements PA4Constants {
     finally { jj_save(7, xla); }
   }
 
+  static private boolean jj_3R_13() {
+    if (jj_3R_18()) return true;
+    return false;
+  }
+
+  static private boolean jj_3R_22() {
+    if (jj_3R_12()) return true;
+    return false;
+  }
+
   static private boolean jj_3R_21() {
     if (jj_scan_token(INT)) return true;
     return false;
@@ -675,17 +682,17 @@ public class PA4 implements PA4Constants {
     return false;
   }
 
-  static private boolean jj_3_8() {
-    if (jj_scan_token(NEW)) return true;
-    if (jj_scan_token(INT)) return true;
-    if (jj_scan_token(LBRACKET)) return true;
-    return false;
-  }
-
   static private boolean jj_3_7() {
     if (jj_scan_token(DOT)) return true;
     if (jj_3R_12()) return true;
     if (jj_scan_token(LPAREN)) return true;
+    return false;
+  }
+
+  static private boolean jj_3_8() {
+    if (jj_scan_token(NEW)) return true;
+    if (jj_scan_token(INT)) return true;
+    if (jj_scan_token(LBRACKET)) return true;
     return false;
   }
 
@@ -846,16 +853,6 @@ public class PA4 implements PA4Constants {
 
   static private boolean jj_3R_12() {
     if (jj_scan_token(ID)) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_13() {
-    if (jj_3R_18()) return true;
-    return false;
-  }
-
-  static private boolean jj_3R_22() {
-    if (jj_3R_12()) return true;
     return false;
   }
 
