@@ -201,12 +201,12 @@ import syntaxtree.*;
        int indent = (int) data;
        String e1 = (String) node.e1.accept(this,indent);
        String e2 = (String) node.e2.accept(this,indent);
-       return e1 + e2;
+       return e1 + "[" + e2 + "]";
    }
    public Object visit(ArrayLength node, Object data){
        int indent = (int) data;
        String e = (String) node.e.accept(this,indent);
-       return e;
+       return ".length";
    }
    public Object visit(Call node, Object data){
         // 
