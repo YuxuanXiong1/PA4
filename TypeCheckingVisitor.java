@@ -56,23 +56,32 @@ public class TypeCheckingVisitor implements Visitor {
         node.e2.accept(this, data);
 
         return "*void";
-    } 
+    }
 
-    public Object visit(ArrayLength node, Object data){ 
-        // not in miniC
-        Exp e=node.e;
-        node.e.accept(this, data);
-        return data; 
-    } 
+    public Object visit(ArrayLength node, Object data){
+        Exp e = node.e;
+        String t = (String) e.accept(this, data);
+        if (!t.equals("int[]")) {
+            System.out.println("Type error: " + t + " is not a valid type for array length");
+            num_errors++;
+        }
+        return "int";
+    }
 
-    public Object visit(ArrayLookup node, Object data){ 
-        // not in miniC
-        Exp e1=node.e1;
-        Exp e2=node.e2;
-        node.e1.accept(this, data);
-        node.e2.accept(this, data);
-        return data; 
-    } 
+    public Object visit(ArrayLookup node, Object data){
+        Exp e1 = node.e1;
+        Exp e2 = node.e2;
+        String t1 = (String) e1.accept(this, data);
+        String t2 = (String) e2.accept(this, data);
+        if(t1 == null || t2 == null){
+            System.out.println("Type error: null type found");
+            num_errors++;
+        } else if (!t1.equals("int[]") || !t2.equals("int")) {
+            System.out.println("Type error: " + t1 + " and " + t2 + " are not valid types for array lookup");
+            num_errors++;
+        }
+        return "int";
+    }
 
     public Object visit(Assign node, Object data){ 
         Identifier i=node.i;
@@ -347,21 +356,23 @@ public class TypeCheckingVisitor implements Visitor {
         return "int"; 
     }
 
-    public Object visit(NewArray node, Object data){ 
-        // not in miniC
-        Exp e=node.e;
-        node.e.accept(this, data);
-
-        return data; 
+    public Object visit(NewArray node, Object data){
+        Exp e = node.e;
+        String t = (String) e.accept(this, data);
+        if (t == null) {
+            System.out.println("Type error: null type found");
+            num_errors++;
+        } else if (!t.equals("int")) {
+            System.out.println("Type error: " + t + " is not a valid type for array size");
+            num_errors++;
+        }
+        return "int[]";
     }
 
 
-    public Object visit(NewObject node, Object data){ 
-        // not in miniC
-        Identifier i=node.i;
-        node.i.accept(this, data);
-
-        return data; 
+    public Object visit(NewObject node, Object data){
+        Identifier i = node.i;
+        return i.s;
     }
 
 
