@@ -206,7 +206,7 @@ import syntaxtree.*;
    public Object visit(ArrayLength node, Object data){
        int indent = (int) data;
        String e = (String) node.e.accept(this,indent);
-       return ".length";
+       return e + ".length";
    }
    public Object visit(Call node, Object data){
         // 
